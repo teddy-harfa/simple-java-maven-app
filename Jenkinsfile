@@ -20,7 +20,6 @@ node {
         //deploy application
         docker.image('maven:3.9.9-eclipse-temurin-21').inside('-v /root/.m2:/root/.m2'){
             sh './jenkins/scripts/deliver.sh'
-            sh "cat target/${NAME}-${VERSION}.jar | ssh -i /home/latihan_ci/deploy-app.pem ec2-user@ec2-13-251-156-231.ap-southeast-1.compute.amazonaws.com 'cat > runnable.jar && java -jar runnable.jar'"
             // export NAME="$(NAME)"
             // export VERSION="$(VERSION)"
             //copy file via ssh then test run

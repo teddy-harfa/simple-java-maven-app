@@ -24,5 +24,7 @@ set +x
 # echo 'application (which Jenkins built using Maven) to the Jenkins UI.'
 # set -x
 # java -jar target/${NAME}-${VERSION}.jar
-
+set -x 
+cat target/${NAME}-${VERSION}.jar | ssh -i "/home/latihan_ci/deploy-app.pem" ec2-user@ec2-13-251-156-231.ap-southeast-1.compute.amazonaws.com "cat > runnable.jar" && java -jar runnable.jar
+set +x
 
