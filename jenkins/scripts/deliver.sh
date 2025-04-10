@@ -25,6 +25,8 @@ set +x
 # set -x
 # java -jar target/${NAME}-${VERSION}.jar
 set -x 
-cat target/${NAME}-${VERSION}.jar | ssh -i "/home/latihan_ci/deploy-app.pem" ec2-user@ec2-13-251-156-231.ap-southeast-1.compute.amazonaws.com "cat > runnable.jar" && java -jar runnable.jar
+#cat target/${NAME}-${VERSION}.jar | ssh -i "/home/latihan_ci/deploy-app.pem" ec2-user@ec2-13-251-156-231.ap-southeast-1.compute.amazonaws.com "cat > runnable.jar" && java -jar runnable.jar
+scp target/${NAME}-${VERSION}.jar -i "/home/latihan_ci/deploy-app.pem" dicoding@172.27.176.246
+ssh -i "/home/latihan_ci/deploy-app.pem" "java -jar runnable.jar"
 set +x
 
