@@ -23,32 +23,33 @@ node {
             // export NAME="$(NAME)"
             // export VERSION="$(VERSION)"
             //copy file via ssh then test run
-            // sshPublisher(
-            //     publishers: [
-            //         sshPublisherDesc(
-            //             configName: 'Aws ec2', 
-            //             transfers: [
-            //                 sshTransfer(
-            //                     cleanRemote: false, 
-            //                     excludes: '', 
-            //                     execCommand: "java -jar target/${NAME}-${VERSION}.jar", 
-            //                     execTimeout: 120000, 
-            //                     flatten: false, 
-            //                     makeEmptyDirs: false, 
-            //                     noDefaultExcludes: false, 
-            //                     patternSeparator: '[, ]+', 
-            //                     remoteDirectory: '', 
-            //                     remoteDirectorySDF: false, 
-            //                     removePrefix: '', 
-            //                     sourceFiles: "target/${NAME}-${VERSION}.jar"
-            //                 )
-            //             ], 
-            //             usePromotionTimestamp: false, 
-            //             useWorkspaceInPromotion: false, 
-            //             verbose: false
-            //         )
-            //     ]
-            // )
+            sshPublisher(
+                publishers: [
+                    sshPublisherDesc(
+                        // configName: 'Aws ec2', 
+                        configName: 'local', 
+                        transfers: [
+                            sshTransfer(
+                                cleanRemote: false, 
+                                excludes: '', 
+                                execCommand: "java -jar runnable.jar", 
+                                execTimeout: 120000, 
+                                flatten: false, 
+                                makeEmptyDirs: false, 
+                                noDefaultExcludes: false, 
+                                patternSeparator: '[, ]+', 
+                                remoteDirectory: '', 
+                                remoteDirectorySDF: false, 
+                                removePrefix: 'target', 
+                                sourceFiles: "target/runnable.jar"
+                            )
+                        ], 
+                        usePromotionTimestamp: false, 
+                        useWorkspaceInPromotion: false, 
+                        verbose: false
+                    )
+                ]
+            )
             //biarkan aplikasi berjalan 1 menit
             sleep time: 1, unit: 'MINUTES'
         }
